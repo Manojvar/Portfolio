@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manoj Varma Samanthapudi - DevOps Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        /*
+         * CSS Styling for the Portfolio Website
+         * This section defines the design system, layout, and visual effects.
+         */
+
+        :root {
+            --bg-color: #0d1117;
+            --primary-text-color: #e6edf3;
+            --secondary-text-color: #79838b;
+            --accent-color-1: #58a6ff;
+            --accent-color-2: #3083ff;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --success-color: #3fb950;
+            --warning-color: #d29922;
+            --info-color: #56d364;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-color);
+            color: var(--primary-text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #0d1117, #1b263b);
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #232a35;
+            color: var(--accent-color-1);
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .hero-section h2 {
+            font-size: 1.5rem;
+            color: var(--secondary-text-color);
+            margin-bottom: 20px;
+        }
+
+        .hero-section p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            color: var(--info-color);
+        }
+
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .skills-tags span {
+            background: var(--card-bg);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .hero-actions .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn.primary {
+            background: var(--accent-color-1);
+            color: var(--bg-color);
+            margin-right: 15px;
+        }
+
+        .btn.secondary {
+            background: transparent;
+            border: 1px solid var(--accent-color-1);
+            color: var(--accent-color-1);
+        }
+
+        .btn.primary:hover {
+            background: var(--accent-color-2);
+        }
+
+        .btn.secondary:hover {
+            background: var(--accent-color-1);
+            color: var(--bg-color);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #1b263b, #0d1117);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-card i {
+            font-size: 2rem;
+            color: var(--accent-color-1);
+            margin-bottom: 10px;
+        }
+
+        .stat-card h3 {
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+
+        /* General Section Styling */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            color: var(--secondary-text-color);
+            margin-bottom: 60px;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 30px;
+            grid-template-areas:
+                "story what"
+                "mission mission";
+        }
+
+        .my-story-card { grid-area: story; }
+        .what-i-bring-card { grid-area: what; }
+        .mission-cards-grid {
+            grid-area: mission;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            padding: 25px;
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+        }
+
+        .what-i-bring-card ul {
+            list-style: none;
+        }
+
+        .what-i-bring-card li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .what-i-bring-card i {
+            color: var(--success-color);
+        }
+
+        .mission-card {
+            text-align: center;
+        }
+
+        .mission-card i {
+            font-size: 2rem;
+            color: var(--accent-color-1);
+            margin-bottom: 10px;
+        }
+
+        /* Technical Expertise */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .expertise-category h4 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-color-1);
+        }
+
+        .skill-item {
+            margin-bottom: 20px;
+        }
+
+        .skill-item p {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .progress-bar-container {
+            background: var(--border-color);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color-1), var(--info-color));
+            transition: width 0.5s ease-in-out;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .project-card {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .project-card h4 {
+            padding: 15px;
+            font-size: 1.2rem;
+            background: var(--card-bg);
+        }
+
+        .project-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .project-badge.production {
+            background: var(--success-color);
+            color: var(--bg-color);
+        }
+
+        .project-badge.category {
+            background: #d29922; /* Example color for Hospitality */
+            color: var(--bg-color);
+            left: auto;
+            right: 15px;
+        }
+
+        .project-badge.category.energy {
+            background: #56d364; /* Example color for Energy */
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid var(--border-color);
+            color: var(--secondary-text-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section h2 {
+                font-size: 1.2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "story"
+                    "what"
+                    "mission";
+            }
+
+            .mission-cards-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section: The main introduction section with a terminal-like aesthetic -->
+    <header class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <span class="badge">Available for DevOps Opportunities</span>
+                <h1>Med Aymen Chakroun</h1>
+                <h2>Computer Science Engineer, <br> IT Infrastructure & Cloud Computing Specialist</h2>
+                <p>DevOps Engineer who automates the complex, secures the critical, and scales what matters</p>
+                <div class="skills-tags">
+                    <span><i class="fas fa-cubes"></i> Kubernetes</span>
+                    <span><i class="fab fa-aws"></i> AWS</span>
+                    <span><i class="fas fa-code-branch"></i> GitOps</span>
+                    <span><i class="fas fa-shield-alt"></i> DevSecOps</span>
+                    <span><i class="fas fa-sync-alt"></i> CI/CD</span>
+                    <span><i class="fas fa-cogs"></i> Terraform</span>
+                    <span><i class="fab fa-docker"></i> Docker</span>
+                    <span><i class="fas fa-chart-line"></i> Prometheus</span>
+                </div>
+                <div class="hero-actions">
+                    <a href="#" class="btn primary">Let's Connect</a>
+                    <a href="#" class="btn secondary">View Resume</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Stats Section: Highlights key achievements in a grid layout -->
+        <section class="stats-section">
+            <div class="container stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>50% Faster Deployments</h3>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>90% Vulnerabilities Blocked</h3>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-dollar-sign"></i>
+                    <h3>30% Cost Reduction</h3>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-globe"></i>
+                    <h3>7+ Freelance Projects</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section: Details the developer's story and mission -->
+        <section class="about-section">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <h3 class="section-subtitle">The journey from circuits to containers</h3>
+                <div class="about-grid">
+                    <div class="my-story-card card">
+                        <h3>My Story</h3>
+                        <p>I started my journey in the world of computer science as an engineer, fascinated by the intricate dance of circuits and code. My early experiences laid the foundation for a deep understanding of software and hardware interaction. However, I soon discovered my passion lay in bridging the gap between development and operations. This led me to specialize in IT infrastructure and cloud computing, transforming how teams build and deploy software. My path has been a continuous evolution, from a theoretical understanding of systems to hands-on, practical implementation of resilient and scalable architectures.</p>
+                    </div>
+                    <div class="what-i-bring-card card">
+                        <h3>What I Bring to Your Team</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Expertise in building scalable, secure, and resilient infrastructure.</li>
+                            <li><i class="fas fa-check-circle"></i> Proven ability to implement and manage CI/CD pipelines.</li>
+                            <li><i class="fas fa-check-circle"></i> A strong focus on automating repetitive tasks to improve efficiency.</li>
+                            <li><i class="fas fa-check-circle"></i> A proactive approach to security with DevSecOps best practices.</li>
+                            <li><i class="fas fa-check-circle"></i> A collaborative spirit with a passion for knowledge sharing.</li>
+                        </ul>
+                    </div>
+                    <div class="mission-cards-grid">
+                        <div class="mission-card card">
+                            <i class="fas fa-heart"></i>
+                            <h4>Passion</h4>
+                            <p>An unwavering enthusiasm for all things technology and innovation.</p>
+                        </div>
+                        <div class="mission-card card">
+                            <i class="fas fa-rocket"></i>
+                            <h4>Mission</h4>
+                            <p>To automate complex processes and build reliable, efficient systems.</p>
+                        </div>
+                        <div class="mission-card card">
+                            <i class="fas fa-award"></i>
+                            <h4>Excellence</h4>
+                            <p>Committed to delivering high-quality, maintainable solutions.</p>
+                        </div>
+                        <div class="mission-card card">
+                            <i class="fas fa-lightbulb"></i>
+                            <h4>Innovation</h4>
+                            <p>Always exploring new tools and methodologies to drive progress.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Expertise Section: Showcases skills with progress bars -->
+        <section class="expertise-section">
+            <div class="container">
+                <h2 class="section-title">Technical Expertise Matrix</h2>
+                <h3 class="section-subtitle">Comprehensive skill assessment with real-world project experience</h3>
+                <div class="expertise-grid">
+                    <div class="expertise-category">
+                        <h4>Container Orchestration</h4>
+                        <div class="skill-item">
+                            <p>Kubernetes</p>
+                            <div class="progress-bar-container"><div class="progress-bar" style="width: 90%;"></div></div>
+                            <small>1+ year | 6 projects | 90%</small>
+                        </div>
+                        <div class="skill-item">
+                            <p>Docker</p>
+                            <div class="progress-bar-container"><div class="progress-bar" style="width: 95%;"></div></div>
+                            <small>2+ years | 10+ projects | 95%</small>
+                        </div>
+                    </div>
+                    <div class="expertise-category">
+                        <h4>Cloud Platforms</h4>
+                        <div class="skill-item">
+                            <p>AWS</p>
+                            <div class="progress-bar-container"><div class="progress-bar" style="width: 85%;"></div></div>
+                            <small>1+ year | 5 projects | 85%</small>
+                        </div>
+                        <div class="skill-item">
+                            <p>Azure</p>
+                            <div class="progress-bar-container"><div class="progress-bar" style="width: 70%;"></div></div>
+                            <small>6+ months | 2 projects | 70%</small>
+                        </div>
+                    </div>
+                    <!-- Add more categories and skills here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section: Highlights a few key projects -->
+        <section class="projects-section">
+            <div class="container">
+                <h2 class="section-title">Featured Projects</h2>
+                <h3 class="section-subtitle">Real-world solutions that deliver measurable impact</h3>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <span class="project-badge production">In Production</span>
+                        <span class="project-badge category hospitality">Hospitality</span>
+                        <img src="https://placehold.co/600x400/161b22/e6edf3?text=Project+1" alt="Dubai Hospitality Showcase Website">
+                        <h4>Dubai Hospitality Showcase Website</h4>
+                    </div>
+                    <div class="project-card">
+                        <span class="project-badge production">In Production</span>
+                        <span class="project-badge category energy">Energy</span>
+                        <img src="https://placehold.co/600x400/161b22/e6edf3?text=Project+2" alt="Solar Energy Showcase Website">
+                        <h4>Solar Energy Showcase Website</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer: Provides copyright and contact info -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Med Aymen Chakroun. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!--
+     * JavaScript for interactive features
+     * Handles functionality like the terminal simulation and other dynamic elements.
+     -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Note: The original website had a terminal simulation.
+            // This is a placeholder as the terminal functionality was removed in the final request.
+            console.log("Website loaded successfully. Interactive elements are ready.");
+        });
+    </script>
+</body>
+</html>
