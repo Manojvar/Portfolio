@@ -8,11 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <style>
-        /*
-         * CSS Styling for the Portfolio Website
-         * This section defines the design system, layout, and visual effects.
-         */
-
         :root {
             --bg-color: #0d1117;
             --primary-text-color: #e6edf3;
@@ -24,6 +19,23 @@
             --success-color: #3fb950;
             --warning-color: #d29922;
             --info-color: #56d364;
+            --toggle-bg: #232a35;
+            --toggle-slider: #58a6ff;
+        }
+
+        body.light {
+            --bg-color: #f9f9f9;
+            --primary-text-color: #22272e;
+            --secondary-text-color: #6c7983;
+            --accent-color-1: #3083ff;
+            --accent-color-2: #58a6ff;
+            --card-bg: #fff;
+            --border-color: #d0d7de;
+            --success-color: #256029;
+            --warning-color: #d29922;
+            --info-color: #3083ff;
+            --toggle-bg: #eaeaea;
+            --toggle-slider: #3083ff;
         }
 
         * {
@@ -42,6 +54,7 @@
             color: var(--primary-text-color);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background 0.6s, color 0.6s;
         }
 
         .container {
@@ -49,6 +62,51 @@
             margin: 0 auto;
             padding: 0 20px;
         }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+        }
+        .toggle-switch input[type="checkbox"] {
+            display: none;
+        }
+        .toggle-label {
+            background: var(--toggle-bg);
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            height: 28px;
+            width: 56px;
+            position: relative;
+            transition: background 0.3s;
+            border: 1px solid var(--border-color);
+        }
+        .toggle-slider {
+            background: var(--toggle-slider);
+            border-radius: 50%;
+            height: 22px;
+            width: 22px;
+            position: absolute;
+            left: 3px;
+            top: 2.5px;
+            transition: left 0.3s, background 0.3s;
+        }
+        input[type="checkbox"]:checked + .toggle-label .toggle-slider {
+            left: 31px;
+            background: var(--accent-color-2);
+        }
+        .toggle-sun, .toggle-moon {
+            font-size: 1.1em;
+            margin: 0 6px;
+        }
+        .toggle-sun { color: #f1c40f; }
+        .toggle-moon { color: #34495e; }
 
         /* Hero Section */
         .hero-section {
@@ -58,7 +116,9 @@
             position: relative;
             overflow: hidden;
         }
-
+        body.light .hero-section {
+            background: linear-gradient(135deg, #f9f9f9, #d0e2ff);
+        }
         .hero-section::before {
             content: '';
             position: absolute;
@@ -69,11 +129,30 @@
             background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
             background-size: 20px 20px;
         }
-
         .hero-content {
             position: relative;
             z-index: 1;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fade-slide-in 1s 0.3s ease-out forwards;
         }
+
+        /* Animation */
+        @keyframes fade-slide-in {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fade-slide-in 1s forwards;
+        }
+        .fade-in.delay-1 { animation-delay: 0.3s; }
+        .fade-in.delay-2 { animation-delay: 0.6s; }
+        .fade-in.delay-3 { animation-delay: 0.9s; }
+        .fade-in.delay-4 { animation-delay: 1.2s; }
 
         .badge {
             display: inline-block;
@@ -84,26 +163,24 @@
             margin-bottom: 20px;
             font-weight: 600;
         }
+        body.light .badge { background: #eaeaea; color: var(--accent-color-2); }
 
         .hero-section h1 {
             font-size: 3.5rem;
             margin-bottom: 10px;
             font-family: 'Roboto Mono', monospace;
         }
-
         .hero-section h2 {
             font-size: 1.5rem;
             color: var(--secondary-text-color);
             margin-bottom: 20px;
         }
-
         .hero-section p {
             max-width: 600px;
             margin: 0 auto 30px;
             font-size: 1.1rem;
             color: var(--info-color);
         }
-
         .skills-tags {
             display: flex;
             flex-wrap: wrap;
@@ -111,7 +188,6 @@
             gap: 10px;
             margin-bottom: 40px;
         }
-
         .skills-tags span {
             background: var(--card-bg);
             padding: 8px 15px;
@@ -121,36 +197,55 @@
             align-items: center;
             gap: 8px;
             border: 1px solid var(--border-color);
+            transition: background 0.3s, color 0.3s, box-shadow 0.3s;
         }
-
+        .skills-tags span:hover {
+            background: var(--accent-color-1);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(88,166,255,0.18);
+        }
         .hero-actions .btn {
             display: inline-block;
             padding: 12px 25px;
             border-radius: 5px;
             text-decoration: none;
             font-weight: 600;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s, color 0.3s, transform 0.2s;
+            margin: 0 5px;
         }
-
         .btn.primary {
             background: var(--accent-color-1);
             color: var(--bg-color);
-            margin-right: 15px;
         }
-
         .btn.secondary {
             background: transparent;
             border: 1px solid var(--accent-color-1);
             color: var(--accent-color-1);
         }
-
         .btn.primary:hover {
             background: var(--accent-color-2);
+            transform: translateY(-3px) scale(1.05);
         }
-
         .btn.secondary:hover {
             background: var(--accent-color-1);
             color: var(--bg-color);
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .section-subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            color: var(--secondary-text-color);
+            margin-bottom: 60px;
         }
 
         /* Stats Section */
@@ -158,48 +253,36 @@
             padding: 60px 0;
             background: linear-gradient(135deg, #1b263b, #0d1117);
         }
-
+        body.light .stats-section {
+            background: linear-gradient(135deg, #eaeaea, #f9f9f9);
+        }
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
             text-align: center;
         }
-
         .stat-card {
             background: var(--card-bg);
             padding: 30px;
             border-radius: 10px;
             border: 1px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fade-slide-in 1s forwards;
         }
-
+        .stat-card:nth-child(1) { animation-delay: .2s;}
+        .stat-card:nth-child(2) { animation-delay: .4s;}
+        .stat-card:nth-child(3) { animation-delay: .6s;}
+        .stat-card:nth-child(4) { animation-delay: .8s;}
         .stat-card i {
             font-size: 2rem;
             color: var(--accent-color-1);
             margin-bottom: 10px;
         }
-
         .stat-card h3 {
             font-size: 1.2rem;
             font-weight: 400;
-        }
-
-        /* General Section Styling */
-        section {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .section-subtitle {
-            font-size: 1.2rem;
-            text-align: center;
-            color: var(--secondary-text-color);
-            margin-bottom: 60px;
         }
 
         /* About Section */
@@ -212,7 +295,6 @@
                 "story what"
                 "mission mission";
         }
-
         .my-story-card { grid-area: story; }
         .what-i-bring-card { grid-area: what; }
         .mission-cards-grid {
@@ -221,37 +303,35 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
         }
-
         .card {
             background: var(--card-bg);
             border-radius: 10px;
             border: 1px solid var(--border-color);
             padding: 25px;
+            transition: box-shadow 0.3s, transform 0.3s;
         }
-
+        .card:hover {
+            box-shadow: 0 4px 18px rgba(88,166,255,0.15), 0 2px 8px rgba(0,0,0,0.05);
+            transform: translateY(-6px) scale(1.03);
+        }
         .card h3 {
             margin-bottom: 15px;
         }
-
         .what-i-bring-card ul {
             list-style: none;
         }
-
         .what-i-bring-card li {
             display: flex;
             align-items: center;
             gap: 10px;
             margin-bottom: 10px;
         }
-
         .what-i-bring-card i {
             color: var(--success-color);
         }
-
         .mission-card {
             text-align: center;
         }
-
         .mission-card i {
             font-size: 2rem;
             color: var(--accent-color-1);
@@ -264,33 +344,36 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 40px;
         }
-
         .expertise-category h4 {
             font-size: 1.5rem;
             margin-bottom: 20px;
             color: var(--accent-color-1);
         }
-
         .skill-item {
             margin-bottom: 20px;
         }
-
         .skill-item p {
             font-weight: 600;
             margin-bottom: 5px;
         }
-
         .progress-bar-container {
             background: var(--border-color);
             height: 8px;
             border-radius: 4px;
             overflow: hidden;
         }
-
         .progress-bar {
             height: 100%;
             background: linear-gradient(90deg, var(--accent-color-1), var(--info-color));
-            transition: width 0.5s ease-in-out;
+            width: 0%;
+            transition: width 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+        }
+        .progress-bar.animated {
+            /* width will be set with JS */
+        }
+        .skill-item small {
+            display: block;
+            color: var(--secondary-text-color);
         }
 
         /* Projects Section */
@@ -299,26 +382,27 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 30px;
         }
-
         .project-card {
             position: relative;
             border-radius: 10px;
             overflow: hidden;
             border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fade-slide-in 1s forwards;
         }
-
+        .project-card:nth-child(1) { animation-delay: .2s;}
+        .project-card:nth-child(2) { animation-delay: .4s;}
         .project-card img {
             width: 100%;
             height: 250px;
             object-fit: cover;
         }
-
         .project-card h4 {
             padding: 15px;
             font-size: 1.2rem;
-            background: var(--card-bg);
         }
-
         .project-badge {
             position: absolute;
             top: 15px;
@@ -328,21 +412,18 @@
             font-size: 0.8rem;
             font-weight: 600;
         }
-
         .project-badge.production {
             background: var(--success-color);
             color: var(--bg-color);
         }
-
         .project-badge.category {
-            background: #d29922; /* Example color for Hospitality */
+            background: #d29922; 
             color: var(--bg-color);
             left: auto;
             right: 15px;
         }
-
         .project-badge.category.energy {
-            background: #56d364; /* Example color for Energy */
+            background: #56d364;
         }
 
         /* Footer */
@@ -351,22 +432,11 @@
             padding: 20px 0;
             border-top: 1px solid var(--border-color);
             color: var(--secondary-text-color);
+            background: var(--card-bg);
         }
 
         /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero-section h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-section h2 {
-                font-size: 1.2rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
+        @media (max-width: 1024px) {
             .about-grid {
                 grid-template-columns: 1fr;
                 grid-template-areas:
@@ -374,22 +444,36 @@
                     "what"
                     "mission";
             }
-
             .mission-cards-grid {
                 grid-template-columns: 1fr 1fr;
             }
-
-            .expertise-grid {
-                grid-template-columns: 1fr;
-            }
-
             .projects-grid {
                 grid-template-columns: 1fr;
             }
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2.5rem; }
+            .hero-section h2 { font-size: 1.2rem; }
+            section { padding: 40px 0; }
         }
     </style>
 </head>
 <body>
+    <!-- Dark/Light Toggle Switch -->
+    <div class="toggle-switch">
+        <input type="checkbox" id="theme-toggle">
+        <label for="theme-toggle" class="toggle-label">
+            <span class="toggle-sun"><i class="fas fa-sun"></i></span>
+            <span class="toggle-slider"></span>
+            <span class="toggle-moon"><i class="fas fa-moon"></i></span>
+        </label>
+    </div>
 
     <!-- Hero Section: The main introduction section with a terminal-like aesthetic -->
     <header class="hero-section">
@@ -443,21 +527,21 @@
         <!-- About Section: Details the developer's story and mission -->
         <section class="about-section">
             <div class="container">
-                <h2 class="section-title">About Me</h2>
-                <h3 class="section-subtitle">Dev&Ops engineer</h3>
+                <h2 class="section-title fade-in delay-1">About Me</h2>
+                <h3 class="section-subtitle fade-in delay-2">Dev&Ops engineer</h3>
                 <div class="about-grid">
-                    <div class="my-story-card card">
+                    <div class="my-story-card card fade-in delay-2">
                         <h3>My Story</h3>
                         <p>AWS Cloud Engineer with 5+ years of experience in designing, deploying, and managing cost-effective, high-
 availability AWS cloud solutions. AWS Certified Solutions Architect – Associate, proficient in leveraging AWS
-products and services such as EC2, S3, AWS Direct Connect, IAM,AWS Control Tower, AWS Organizations,
+products and services such as EC2, S3, AWS Direct Connect, IAM, AWS Control Tower, AWS Organizations,
 AWS Identity Center. Skilled in automating infrastructure using AWS SDK, CLI tools, CloudFormation, and
 Terraform. Strong expertise in DevOps practices, CI/CD pipelines, and enterprise-scale cloud migrations. Adept
 at implementing security best practices, disaster recovery solutions, and optimizing cloud performance through
 monitoring and automation. Passionate about driving operational efficiency and business growth through cloud
 innovation.</p>
                     </div>
-                    <div class="what-i-bring-card card">
+                    <div class="what-i-bring-card card fade-in delay-3">
                         <h3>What I Bring to Your Team</h3>
                         <ul>
                             <li><i class="fas fa-check-circle"></i> Expertise in building scalable, secure, and resilient infrastructure.</li>
@@ -467,7 +551,7 @@ innovation.</p>
                             <li><i class="fas fa-check-circle"></i> A collaborative spirit with a passion for knowledge sharing.</li>
                         </ul>
                     </div>
-                    <div class="mission-cards-grid">
+                    <div class="mission-cards-grid fade-in delay-4">
                         <div class="mission-card card">
                             <i class="fas fa-heart"></i>
                             <h4>Passion</h4>
@@ -503,12 +587,12 @@ innovation.</p>
                         <h4>Container Orchestration</h4>
                         <div class="skill-item">
                             <p>Kubernetes</p>
-                            <div class="progress-bar-container"><div class="progress-bar" style="width: 90%;"></div></div>
+                            <div class="progress-bar-container"><div class="progress-bar" data-progress="90"></div></div>
                             <small>1+ year | 6 projects | 90%</small>
                         </div>
                         <div class="skill-item">
                             <p>Docker</p>
-                            <div class="progress-bar-container"><div class="progress-bar" style="width: 95%;"></div></div>
+                            <div class="progress-bar-container"><div class="progress-bar" data-progress="95"></div></div>
                             <small>2+ years | 10+ projects | 95%</small>
                         </div>
                     </div>
@@ -516,12 +600,12 @@ innovation.</p>
                         <h4>Cloud Platforms</h4>
                         <div class="skill-item">
                             <p>AWS</p>
-                            <div class="progress-bar-container"><div class="progress-bar" style="width: 85%;"></div></div>
+                            <div class="progress-bar-container"><div class="progress-bar" data-progress="85"></div></div>
                             <small>1+ year | 5 projects | 85%</small>
                         </div>
                         <div class="skill-item">
                             <p>Azure</p>
-                            <div class="progress-bar-container"><div class="progress-bar" style="width: 70%;"></div></div>
+                            <div class="progress-bar-container"><div class="progress-bar" data-progress="70"></div></div>
                             <small>6+ months | 2 projects | 70%</small>
                         </div>
                     </div>
@@ -560,15 +644,90 @@ innovation.</p>
         </div>
     </footer>
 
-    <!--
-     * JavaScript for interactive features
-     * Handles functionality like the terminal simulation and other dynamic elements.
-     -->
+    <!-- Animation & Theme Toggle Script -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Note: The original website had a terminal simulation.
-            // This is a placeholder as the terminal functionality was removed in the final request.
-            console.log("Website loaded successfully. Interactive elements are ready.");
+        // Animate skill progress bars
+        function animateProgressBars() {
+            document.querySelectorAll('.progress-bar').forEach(function(bar) {
+                const percent = bar.getAttribute('data-progress');
+                bar.classList.add('animated');
+                setTimeout(() => {
+                    bar.style.width = percent + '%';
+                }, 200);
+            });
+        }
+        // Animate on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            animateProgressBars();
+
+            // Fade in elements on scroll
+            const fadeEls = document.querySelectorAll('.fade-in');
+            const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            fadeEls.forEach(el => appearOnScroll.observe(el));
+
+            // Animate projects on scroll
+            document.querySelectorAll('.project-card').forEach((card, idx) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(40px)';
+                new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(entry => {
+                        if(entry.isIntersecting) {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                            observer.unobserve(card);
+                        }
+                    });
+                }, { threshold: 0.15 }).observe(card);
+            });
+
+            // Animate stats on scroll
+            document.querySelectorAll('.stat-card').forEach((card, idx) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(40px)';
+                new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(entry => {
+                        if(entry.isIntersecting) {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                            observer.unobserve(card);
+                        }
+                    });
+                }, { threshold: 0.15 }).observe(card);
+            });
+        });
+
+        // Dark/Light mode toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        function setTheme(mode) {
+            if(mode === 'light') {
+                document.body.classList.add('light');
+                themeToggle.checked = true;
+            } else {
+                document.body.classList.remove('light');
+                themeToggle.checked = false;
+            }
+            localStorage.setItem('theme', mode);
+        }
+        // On load: set theme from storage or OS
+        (function() {
+            const stored = localStorage.getItem('theme');
+            if(stored) {
+                setTheme(stored);
+            } else {
+                setTheme(prefersDark ? 'dark' : 'light');
+            }
+        })();
+        themeToggle.addEventListener('change', function() {
+            setTheme(this.checked ? 'light' : 'dark');
         });
     </script>
 </body>
